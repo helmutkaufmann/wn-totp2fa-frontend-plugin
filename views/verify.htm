@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h4>Verification Code</h4></div>
+                <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">@foreach ($errors->all() as $error) <p>{{ $error }}</p> @endforeach</div>
+                    @endif
+                    <form method="POST">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <label>Code</label>
+                            <input type="text" class="form-control" name="code" placeholder="000000" required autofocus>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="is_recovery_code" id="rc">
+                            <label class="form-check-label" for="rc">Use recovery code</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Verify</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h4>Recovery Codes</h4></div>
+                <div class="card-body">
+                    <div class="alert alert-warning"><strong>Important!</strong> Save these codes now.</div>
+                    <div class="bg-light p-3 rounded mb-3" id="codesContainer">
+                        <code style="white-space: pre-wrap;">@foreach ($codes as $code) {{ $code }} @endforeach</code>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-secondary btn-sm" onclick="copyToClipboard()">Copy</button>
+                        <button class="btn btn-secondary btn-sm" onclick="downloadCodes()">Download</button>
+                    </div>
+                    <form method="POST" action="{{ route('totp2fa.recovery.acknowledge') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-primary btn-block">I saved codes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function copyToClipboard() { navigator.clipboard.writeText(document.querySelector('#codesContainer code').innerText); alert('Copied!'); }
+function downloadCodes() { var t = document.querySelector('#codesContainer code').innerText; var e = document.createElement('a'); e.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(t)); e.setAttribute*
+

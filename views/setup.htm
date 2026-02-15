@@ -1,0 +1,34 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h4>Enable Two-Factor Authentication</h4></div>
+                <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error) <p>{{ $error }}</p> @endforeach
+                        </div>
+                    @endif
+                    <p>Scan this QR code with your authenticator app</p>
+                    <div class="text-center mb-4">
+                        <h5>QR Code</h5>
+                        <img src="data:image/png;base64,{{ $qrCode }}" alt="QR Code" style="max-width: 100%; height: auto;">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Or enter manually:</label>
+                        <input type="text" class="form-control" value="{{ $secret }}" readonly>
+                    </div>
+                    <form method="POST" action="{{ route('totp2fa.store') }}">
+                        @csrf
+                        <input type="hidden" name="secret" value="{{ $secret }}">
+                        <div class="form-group mb-3">
+                            <label>Verification Code</label>
+                            <input type="text" class="form-control" name="code" placeholder="000000" required autofocus>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Enable 2FA</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
